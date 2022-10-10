@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Extract branch name
+      - name: Extract branch nam
         shell: bash
         run: git describe --tags $(git rev-list --tags --max-count=1)
         id: extract_branch
