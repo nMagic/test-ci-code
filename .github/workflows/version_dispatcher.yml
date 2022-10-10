@@ -1,8 +1,8 @@
 name: Version dispatcher
 on:
   push:
-    tags: 
-    - v.*
+    branches: 
+    - main
     
 jobs:
   build:
@@ -13,12 +13,12 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: git branch -a --contains ${{ github.ref }}
+        run: git describe --tags $(git rev-list --tags --max-count=1)
         id: extract_branch
 
-      - name: Exit if not on master branch
-        if: endsWith(github.ref, 'master') == false
-        run: exit -1
+      # - name: Exit if not on master branch
+      #   if: endsWith(github.ref, 'master') == false
+      #   run: exit -1
 
       - name: Run a one-line script
         run: echo Hello, world!
