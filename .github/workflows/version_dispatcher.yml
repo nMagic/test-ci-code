@@ -1,8 +1,6 @@
 name: Version dispatcher
 on:
   push:
-    branches:
-    - main
     tags: 
     - v.*
     
@@ -12,7 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
+      - name: Exit if not on master branch
+        if: endsWith(github.ref, 'master') == false
+        run: exit -1
+
       - name: Run a one-line script
         run: echo Hello, world!
         
