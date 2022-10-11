@@ -29,7 +29,7 @@ jobs:
 
       - name: Extract branch name
         if: contains(github.ref, 'tags')
-        run: echo "::set-output name=branch::$(git rev-list -n 1 ${{ github.ref }} | git branch --contains)";
+        run: echo "::set-output name=branch::$(git log -n 1 --pretty=%d ${{ github.ref }})";
         id: extract_branch
 
       - name: Check
