@@ -25,7 +25,7 @@ jobs:
             echo "CORRECT_PUSH=1" >> $GITHUB_ENV
           fi
       - name: Check check
-        run: echo $(git rev-list -n 1 ${{ github.ref }})
+        run: echo $(git rev-list -n 1 ${{ github.ref }} | git tag --contains | grep -E "v\.[0-9]+\.[0-9]+\.[0-9]+")
 
       - name: Extract branch name
         if: contains(github.ref, 'tags')
