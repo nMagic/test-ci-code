@@ -11,14 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Extract branch nam
+      - name: Extract branch name
         shell: bash
-        run: git rev-list -n 1 ${{ github.ref }} | git branch --contains
-        id: extract_branch
+        run: echo "::set-output name=branch::$(git rev-list -n 1 ${{ github.ref }} | git branch --contains)"
+        id: branch
 
-      # - name: Exit if not on master branch
-      #   if: endsWith(github.ref, 'master') == false
-      #   run: exit -1
+      - name: test
+        if: contains(steps.branch.outputs.branch, 'main') == true
+        run: echo yikes
 
       - name: Run a one-line script
         run: echo Hello, world!
