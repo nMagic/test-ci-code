@@ -27,8 +27,11 @@ jobs:
 
       - name: Extract branch name
         if: contains(github.ref, 'tags')
-        run: echo "::set-output name=branch::$(git rev-list -n 1 ${{ github.ref }} | git branch --contains)"
+        run: echo "::set-output name=branch::$(git rev-list -n 1 ${{ github.ref }} | git branch --contains)";
         id: extract_branch
+
+      - name: Check
+        run: echo "${{ steps.extract_branch.outputs.branch }}"
 
       - name: Check tag
         if: contains(github.ref, 'tags') && contains(steps.extract_branch.outputs.branch, 'main')
