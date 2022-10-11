@@ -13,7 +13,7 @@ jobs:
 
       - name: Extract branch nam
         shell: bash
-        run: git rev-list -n 1 github.ref | git branch --contains
+        run: git rev-list -n 1 ${{ github.ref }} | git branch --contains
         id: extract_branch
 
       # - name: Exit if not on master branch
