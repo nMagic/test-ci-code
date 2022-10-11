@@ -1,8 +1,8 @@
 name: Version dispatcher
 on:
   push:
-    branches: 
-    - main
+    tags:
+    - v.*
     
 jobs:
   build:
