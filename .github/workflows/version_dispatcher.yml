@@ -15,7 +15,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Check branch
-        if: contains(github.ref, 'heads')
         run: |
           if [[ ${{ github.ref }} =~ "/ref/tags/v\.[0-9]+\.[0-9]+\.[0-9]+") == "" ]]; then
             echo YES
