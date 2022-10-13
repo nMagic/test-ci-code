@@ -25,7 +25,7 @@ jobs:
       - name: Dispatch deploy trigger
         if: ${{ env.CORRECT_TAG == 1 }}
         run: |
-          curl \
+          curl -v \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" \
