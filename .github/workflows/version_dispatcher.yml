@@ -1,8 +1,6 @@
 name: Version dispatcher
 on:
   push:
-    branches:
-    - main
     tags:
     - v.*
     
@@ -19,26 +17,12 @@ jobs:
       - name: Check branch
         if: contains(github.ref, 'heads')
         run: |
-          if [[ $(git rev-list -n 1 ${{ github.ref }} | git tag --contains | grep -E "v\.[0-9]+\.[0-9]+\.[0-9]+") == "" ]]; then
-            echo "CORRECT_PUSH=0" >> $GITHUB_ENV
+          if [[ ${{ github.ref }} =~ "/ref/tags/v\.[0-9]+\.[0-9]+\.[0-9]+") == "" ]]; then
+            echo YES
           else
-            echo "CORRECT_PUSH=1" >> $GITHUB_ENV
+            echo NO
           fi
-      - name: Check check
-        run: echo $(git rev-list -n 1 ${{ github.ref }} | git tag --contains | grep -E "v\.[0-9]+\.[0-9]+\.[0-9]+")
 
-      - name: Extract branch name
-        if: contains(github.ref, 'tags')
-        run: echo "::set-output name=branch::$(git log -n 1 --pretty=%d ${{ github.ref }})";
-        id: extract_branch
-
-      - name: Check
-        run: echo "${{ steps.extract_branch.outputs.branch }}"
-
-      - name: Check tag
-        if: contains(github.ref, 'tags') && contains(steps.extract_branch.outputs.branch, 'main')
-        run: echo "CORRECT_PUSH=1" >> $GITHUB_ENV
-
-      - name: Test
-        if: ${{ env.CORRECT_PUSH == 1 }}
-        run: echo Hooray
+      # - name: Test
+      #   if: ${{ env.CORRECT_PUSH == 1 }}
+      #   run: echo Hooray
