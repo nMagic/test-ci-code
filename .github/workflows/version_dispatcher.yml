@@ -16,7 +16,7 @@ jobs:
 
       - name: Check branch
         run: |
-          if [[ ${{ github.ref }} =~ "/ref/tags/v\.[0-9]+\.[0-9]+\.[0-9]+") == "" ]]; then
+          if [[ "${{ github.ref }}" =~ "/ref/tags/v\.[0-9]+\.[0-9]+\.[0-9]+")]]; then
             echo YES
           else
             echo NO
