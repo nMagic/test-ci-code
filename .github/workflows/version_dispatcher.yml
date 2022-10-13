@@ -5,24 +5,20 @@ on:
     - v.*
     
 env:
-  CORRECT_PUSH: 0
+  CORRECT_TAG: 0
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # - uses: actions/checkout@v3
-
-      - name: Check branch
+      - name: Check tag
         run: |
           if [[ "${{ github.ref }}" =~ refs\/tags\/v\.[0-9]+\.[0-9]+\.[0-9]+ ]]; 
           then
-            echo YES
-          else
-            echo NO
+            echo "CORRECT_TAG=1" >> $GITHUB_ENV
           fi
 
-      # - name: Test
-      #   if: ${{ env.CORRECT_PUSH == 1 }}
-      #   run: echo Hooray
+      - name: Test
+        if: ${{ env.CORRECT_TAG == 1 }}
+        run: echo Hooray
