@@ -25,13 +25,13 @@ jobs:
       - name: Dispatch deploy trigger
         if: ${{ env.CORRECT_TAG == 1 }}
         run: |
-          VERSION=$(echo "${{ github.ref }}" | grep -oP "v\.[0-9]+\.[0-9]+\.[0-9]+")
-          echo $VERSION
-          DATA='{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"'$VERSION'"}}';
-          echo $DATA;
+          # VERSION=$(echo "${{ github.ref }}" | grep -oP "v\.[0-9]+\.[0-9]+\.[0-9]+")
+          # echo $VERSION
+          # DATA='{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"'$VERSION'"}}';
+          # echo $DATA;
           curl -v \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" \
           https://api.github.com/repos/$DEPLOY_TARGET/actions/workflows/$DEPLOY_WORKFLOW/dispatches \
-          -d '$DATA'
+          -d '{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"'$VERSION'"}}' --trace-ascii /dev/stdout
