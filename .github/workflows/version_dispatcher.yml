@@ -30,4 +30,4 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" \
           https://api.github.com/repos/$DEPLOY_TARGET/actions/workflows/$DEPLOY_WORKFLOW/dispatches \
-          -d '{"ref":"$DEPLOY_BRANCH","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"$(echo "${{ github.ref }}" | grep -oP "v\.[0-9]+\.[0-9]+\.[0-9]+")"}}'
+          -d '{"ref":"$DEPLOY_BRANCH","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"$(echo "${{ github.ref }}" | grep -oP "v\.[0-9]+\.[0-9]+\.[0-9]+")"
