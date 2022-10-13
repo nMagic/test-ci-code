@@ -27,7 +27,7 @@ jobs:
         run: |
           VERSION=$(echo "${{ github.ref }}" | grep -oP "v\.[0-9]+\.[0-9]+\.[0-9]+")
           echo $VERSION
-          DATA='{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"$VERSION")"}}';
+          DATA='{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{"app":"ANFISA_FRONTEND_VERSION","version":"'$VERSION'")"}}';
           echo $DATA;
           curl -v \
           -X POST \
