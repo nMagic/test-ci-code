@@ -8,7 +8,7 @@ env:
   CORRECT_TAG: 0
   DEPLOY_TARGET: "nMagic/test-ci-deploy"
   DEPLOY_WORKFLOW: "change_version.yml"
-  DEPLOY_BRANCH: "main"
+  DEPLOY_BRANCH: "b123"
 
 jobs:
   build:
